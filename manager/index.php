@@ -90,6 +90,18 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="?p=problem">
+              <i class="ni ni-planet text-info"></i>Add Problem
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="?p=request">
+              <i class="ni ni-mobile-button text-success "></i>Add Request
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mb-md-3">
+          <li class="nav-item">
             <a class="nav-link " href="?p=history_problem">
               <i class="ni ni-hat-3 text-red"></i> History Problem
             </a>
@@ -97,18 +109,6 @@
           <li class="nav-item">
             <a class="nav-link " href="?p=history_request">
               <i class="ni ni-hat-3 text-red"></i> History Request
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link" href="?p=problem">
-              <i class="ni ni-planet text-info"></i>Problem
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?p=request">
-              <i class="ni ni-mobile-button text-success "></i> Request
             </a>
           </li>
         </ul>
