@@ -13,11 +13,11 @@ if (isset($_POST["submit"]) ){
 	                $_SESSION['password'] = $result["password"];
 	                $_SESSION['id_section'] = $result['id_section'];
 	                $_SESSION['level'] = $result['level'];
-                if ($result['level'] == 'admin') {
+                if ($result['level'] == 'Admin') {
                 	echo "<script>window.location='../admin/index.php';</script>";
-                }elseif ($result['level'] == 'manager') {
+                }elseif ($result['level'] == 'Manager') {
                 	echo "<script>window.location='../manager/index.php';</script>";
-                }elseif ($result['level'] == 'staff') {
+                }elseif ($result['level'] == 'Staff') {
                 	echo "<script>window.location='../staff/index.php';</script>";
                 }else{
 	                echo "<script>alert('Login Failed');</script>";
