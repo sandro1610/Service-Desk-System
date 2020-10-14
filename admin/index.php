@@ -3,7 +3,7 @@
      session_start();
  if (empty($_SESSION['email']) && empty($_SESSION['password']) && empty($_SESSION['id_user'])){
     header("Location:../index.php");
-  }elseif ($_SESSION['level'] != 'Admin') {
+  }elseif ($_SESSION['level'] != 'admin') {
     header("Location:../index.php");
   }
 ?>
