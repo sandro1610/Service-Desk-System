@@ -1,11 +1,11 @@
 <?php
-    include '../includes/conn.php';
-     session_start();
- if (empty($_SESSION['email']) && empty($_SESSION['password']) && empty($_SESSION['id_user'])){
-    header("Location:../index.php");
-  }elseif ($_SESSION['level'] != 'admin') {
-    header("Location:../index.php");
-  }
+include '../includes/conn.php';
+session_start();
+if (empty($_SESSION['email']) && empty($_SESSION['password']) && empty($_SESSION['id_user'])) {
+  header("Location:../index.php");
+} elseif ($_SESSION['level'] != 'admin') {
+  header("Location:../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +21,50 @@
   <!-- Icons -->
   <link rel="stylesheet" href="../assets/nucleo/css/nucleo.css" type="text/css">
   <!-- Page plugins -->
-  <link rel="stylesheet" type="text/css" href="../assets/DataTables/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../assets/DataTables/datatables.min.css" />
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon-dashboard.css?v=1.1.0" type="text/css">
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="https://cdnjs.com/libraries/Chart.js"></script>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  </script>
 </head>
 
 
@@ -81,7 +121,7 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  class=" active=" ">
-          <a class=" nav-link active " href="?p=dashboard"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
+            <a class=" nav-link active " href="?p=dashboard"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
@@ -121,19 +161,19 @@
       <div class="container-fluid">
         <!-- User -->
         <?php
-            $email = $_SESSION['email'];
-            $query = mysqli_query($link,"SELECT * FROM tb_user WHERE email = '$email' ");
-            while($hasil=mysqli_fetch_array($query)) :
+        $email = $_SESSION['email'];
+        $query = mysqli_query($link, "SELECT * FROM tb_user WHERE email = '$email' ");
+        while ($hasil = mysqli_fetch_array($query)) :
         ?>
-        <ul class="navbar-nav align-items-center d-none d-md-flex ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown">
-              <div class="media align-items-center">
-                <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><?php echo $hasil['nama']; ?></span>
+          <ul class="navbar-nav align-items-center d-none d-md-flex ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown">
+                <div class="media align-items-center">
+                  <div class="media-body ml-2 d-none d-lg-block">
+                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $hasil['nama']; ?></span>
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
             <?php endwhile ?>
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
               <a href="include/logout.php" class="dropdown-item">
@@ -141,8 +181,8 @@
                 <span>Logout</span>
               </a>
             </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
       </div>
     </nav>
     <!-- End Navbar -->
@@ -151,10 +191,10 @@
     <div class="container-fluid mt-3">
       <div class="row mt-3">
         <div class="col-md-12 mb-5 mb-xl-0">
-          
-                  <?php
-                  include 'include/controller-page.php';
-                  ?>
+
+          <?php
+          include 'include/controller-page.php';
+          ?>
 
         </div>
       </div>
@@ -169,77 +209,89 @@
   <!-- Argon JS -->
   <script src="../assets/js/argon.min.js?v=1.1.0"></script>
   <script type="text/javascript">
-      $(document).ready( function(){
-          $('#data-problem').DataTable();
-      } );
+    $(document).ready(function() {
+      $('#data-problem').DataTable();
+    });
   </script>
   <script type="text/javascript">
-      $(document).ready( function(){
-          $('#data-request').DataTable();
-      } );
+    $(document).ready(function() {
+      $('#data-request').DataTable();
+    });
   </script>
   <script language="JavaScript" type="text/javascript">
-      function hapusData_problem(no_ticket){
-        if (confirm("Apakah anda yakin akan menghapus data ini?")){
-          window.location.href = 'index.php?p=delete_problem&no_ticket=' + no_ticket;
-        }
+    function hapusData_problem(no_ticket) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?p=delete_problem&no_ticket=' + no_ticket;
       }
-      function send_problem(v_key){
-        if (confirm("Apakah anda yakin akan MENGIRIM data ini?")){
-          window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
-        }
+    }
+
+    function send_problem(v_key) {
+      if (confirm("Apakah anda yakin akan MENGIRIM data ini?")) {
+        window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
       }
-      function approve_problem(v_key){
-        if (confirm("Apakah anda yakin akan MENYETUJUI data ini?")){
-          window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
-        }
+    }
+
+    function approve_problem(v_key) {
+      if (confirm("Apakah anda yakin akan MENYETUJUI data ini?")) {
+        window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
       }
-      function proccess_problem(v_key){
-        if (confirm("Apakah anda yakin akan MEMPROSES data ini?")){
-          window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
-        }
+    }
+
+    function proccess_problem(v_key) {
+      if (confirm("Apakah anda yakin akan MEMPROSES data ini?")) {
+        window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
       }
-      function finish_problem(v_key){
-        if (confirm("Apakah anda yakin akan MENYELESAIKAN data ini?")){
-          window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
-        }
-      }function reject_problem(v_key){
-        if (confirm("Apakah anda yakin akan MENOLAK data ini?")){
-          window.location.href = 'index.php?p=reject_problem&v_key=' + v_key;
-        }
+    }
+
+    function finish_problem(v_key) {
+      if (confirm("Apakah anda yakin akan MENYELESAIKAN data ini?")) {
+        window.location.href = 'index.php?p=approve_problem&v_key=' + v_key;
       }
-    </script>
-    <script language="JavaScript" type="text/javascript">
-      function hapusData_request(no_ticket){
-        if (confirm("Apakah anda yakin akan menghapus data ini?")){
-          window.location.href = 'index.php?p=delete_request&no_ticket=' + no_ticket;
-        }
+    }
+
+    function reject_problem(v_key) {
+      if (confirm("Apakah anda yakin akan MENOLAK data ini?")) {
+        window.location.href = 'index.php?p=reject_problem&v_key=' + v_key;
       }
-      function send_request(v_key){
-        if (confirm("Apakah anda yakin akan MENGIRIM data ini?")){
-          window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
-        }
+    }
+  </script>
+  <script language="JavaScript" type="text/javascript">
+    function hapusData_request(no_ticket) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?p=delete_request&no_ticket=' + no_ticket;
       }
-      function approve_request(v_key){
-        if (confirm("Apakah anda yakin akan MENYETUJUI data ini?")){
-          window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
-        }
+    }
+
+    function send_request(v_key) {
+      if (confirm("Apakah anda yakin akan MENGIRIM data ini?")) {
+        window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
       }
-      function proccess_request(v_key){
-        if (confirm("Apakah anda yakin akan MEMPROSES data ini?")){
-          window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
-        }
+    }
+
+    function approve_request(v_key) {
+      if (confirm("Apakah anda yakin akan MENYETUJUI data ini?")) {
+        window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
       }
-      function finish_request(v_key){
-        if (confirm("Apakah anda yakin akan MENYELESAIKAN data ini?")){
-          window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
-        }
-      }function reject_request(v_key){
-        if (confirm("Apakah anda yakin akan MENOLAK data ini?")){
-          window.location.href = 'index.php?p=reject_request&v_key=' + v_key;
-        }
+    }
+
+    function proccess_request(v_key) {
+      if (confirm("Apakah anda yakin akan MEMPROSES data ini?")) {
+        window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
       }
-    </script>
+    }
+
+    function finish_request(v_key) {
+      if (confirm("Apakah anda yakin akan MENYELESAIKAN data ini?")) {
+        window.location.href = 'index.php?p=approve_request&v_key=' + v_key;
+      }
+    }
+
+    function reject_request(v_key) {
+      if (confirm("Apakah anda yakin akan MENOLAK data ini?")) {
+        window.location.href = 'index.php?p=reject_request&v_key=' + v_key;
+      }
+    }
+  </script>
 </body>
 
 </html>
