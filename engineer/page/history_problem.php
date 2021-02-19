@@ -23,13 +23,14 @@
           </thead>
           <tbody>
           <?php
-              $id_section = $_SESSION['id_section'];
+   
               $sql = "SELECT * FROM tb_problem 
                       INNER JOIN tb_user ON tb_problem.id_user = tb_user.id_user
                       INNER JOIN tb_section ON tb_user.id_section = tb_section.id_section
                       INNER JOIN tb_service ON tb_problem.id_service = tb_service.id_service
                       INNER JOIN tb_item ON tb_problem.id_item = tb_item.id_item
-                      WHERE tb_problem.id_section = '$id_section'";
+                      WHERE status >= 1";
+         
               $query = mysqli_query($link,$sql);
               while($hasil=mysqli_fetch_array($query)):
           ?>
@@ -105,12 +106,10 @@
                                                                                                 if ($hasil['status'] < 1) {
                                                                                                  echo "Draft";
                                                                                                 }elseif($hasil['status'] == 1){
-                                                                                                  echo "New Request";
+                                                                                                  echo "New Report";
                                                                                                 }elseif($hasil['status'] == 2){
-                                                                                                  echo "Approved";
-                                                                                                }elseif($hasil['status'] == 3){
                                                                                                   echo "Proccessing";
-                                                                                                }elseif($hasil['status'] == 4){
+                                                                                                }elseif($hasil['status'] == 3){
                                                                                                   echo "Finish";
                                                                                                 }else{
                                                                                                   echo "Rejected";
@@ -121,10 +120,18 @@
                                   <div class="form-group row">
                                       <label for="file" class="col-sm-3 text-left control-label col-form-label">File</label>
                                       <div class="col-md-6">
-                                          <a download="<?=$hasil['attachment'];?>" href="upload/problem/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a>
+                                          <a download="<?=$hasil['attachment'];?>" href="../upload/problem/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a>
                                       </div>
                                   </div>    
                                   <div class="text-center">
+                              
+                                    <?php if ($_SESSION ['level'] == 'engineer') {?>
+                                    <?php if ($hasil['status'] == 1) {?>
+                                      <a class="btn btn-success" href="javascript:send_problem('<?=$hasil['v_key'];?>')">Proccess</a>
+                                    <?php } elseif ($hasil['status'] == 2) {?>
+                                      <a class="btn btn-success" href="javascript:send_problem('<?=$hasil['v_key'];?>')">FINISH</a>
+                                      <?php } ?>
+                                    <?php } ?>
                                     <a class="btn btn-danger" href="javascript:hapusData_problem('<?=$hasil['no_ticket'];?>')">Delete</a>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-form<?php echo $hasil['no_ticket']; ?>">Edit</button>
                                   </div>
@@ -143,18 +150,16 @@
               <td><?=$hasil['name_service'];?></td>
               <td><?=$hasil['problem'];?></td>
               <td><?=$hasil['name_item'];?></td>
-              <td><a download="<?=$hasil['attachment'];?>" href="upload/problem/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a></td>
+              <td><a download="<?=$hasil['attachment'];?>" href="../upload/problem/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a></td>
               <td><?=$hasil['email'];?></td>
               <td><?php 
                 if ($hasil['status'] < 1) {
                  echo "Draft";
                 }elseif($hasil['status'] == 1){
-                  echo "New Request";
+                  echo "New Report";
                 }elseif($hasil['status'] == 2){
-                  echo "Approved";
-                }elseif($hasil['status'] == 3){
                   echo "Proccessing";
-                }elseif($hasil['status'] == 4){
+                }elseif($hasil['status'] == 3){
                   echo "Finish";
                 }else{
                   echo "Rejected";

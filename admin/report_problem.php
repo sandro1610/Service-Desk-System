@@ -62,10 +62,8 @@ $html='<!DOCTYPE html>
 	                }elseif($hasil['status'] == 1){
 	                  $status = "New Request";
 	                }elseif($hasil['status'] == 2){
-	                  $status = "Approved";
-	                }elseif($hasil['status'] == 3){
 	                  $status = "Proccessing";
-	                }elseif($hasil['status'] == 4){
+	                }elseif($hasil['status'] == 3){
 	                  $status = "Finish";
 	                }else{
 	                  $status = "Rejected";

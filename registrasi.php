@@ -134,6 +134,8 @@ if(isset($_POST["Submit"])){
                       <option value="admin">Admin</option>
                       <option value="manager">Manager</option>
                       <option value="staff">Staff</option>
+                      <option value="petugas">Petugas</option>
+                      <option value="engginer">Engginer</option>
                     </select>
                   </div>
                 </div>

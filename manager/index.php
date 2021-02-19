@@ -25,6 +25,9 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon-dashboard.css?v=1.1.0" type="text/css">
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <link rel="stylesheet" href="../assets/css/all.css">
+  <script src="../assets/js/all.js"></script>
+  <script src="../assets/js/Chart.js"></script>
 </head>
 
 
@@ -90,22 +93,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?p=problem">
-              <i class="ni ni-planet text-info"></i>Add Problem
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="?p=request">
               <i class="ni ni-mobile-button text-success "></i>Add Request
             </a>
           </li>
         </ul>
         <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link " href="?p=history_problem">
-              <i class="ni ni-hat-3 text-red"></i> History Problem
-            </a>
-          </li>
           <li class="nav-item">
             <a class="nav-link " href="?p=history_request">
               <i class="ni ni-hat-3 text-red"></i> History Request

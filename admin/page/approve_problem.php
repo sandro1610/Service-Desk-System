@@ -13,13 +13,13 @@
 	}elseif ($approve == 1) {
 		$query = mysqli_query($link,"UPDATE tb_problem SET status = '2' WHERE v_key = '$v_key'");
 		if ($query) {
-			echo "<script>alert('Problem Approved');</script>";
+			echo "<script>alert('Problem Proccessing');</script>";
 			echo "<script>window.location='?p=history_problem';</script>";
 		}
 	}elseif ($approve == 2) {
 		$query = mysqli_query($link,"UPDATE tb_problem SET status = '3' WHERE v_key = '$v_key'");
 		if ($query) {
-			echo "<script>alert('Problem Proccessing');</script>";
+			echo "<script>alert('Problem Finished');</script>";
 			echo "<script>window.location='?p=history_problem';</script>";
 		}
 	}elseif ($approve == 3) {

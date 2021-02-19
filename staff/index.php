@@ -25,6 +25,9 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon-dashboard.css?v=1.1.0" type="text/css">
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <link rel="stylesheet" href="../assets/css/all.css">
+  <script src="../assets/js/all.js"></script>
+  <script src="../assets/js/Chart.js"></script>
 </head>
 
 

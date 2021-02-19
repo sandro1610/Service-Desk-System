@@ -2,11 +2,11 @@
 $section = $_SESSION['id_section'];
 if(isset($_POST["Submit"])){
     $email = $_SESSION['email'];
-    $tgl_prob = date('Y-m-d');
+    $tgl_req = date('Y-m-d');
     $id_user = $_POST['id_user'];
     $id_section = $_POST['id_section'];
-    $id_service = $_POST['id_service'];
-    $problem = $_POST['problem'];
+    $id_request = $_POST['id_request'];
+    $description = $_POST['description'];
     $id_item = $_POST['id_item'];
     $v_key = md5(time().$id_user);
 
@@ -25,27 +25,28 @@ if(isset($_POST["Submit"])){
     if (in_array($fileActualExt, $allowed)) {
       if ($fileError === 0) {
         if ($fileSize < 1000000) {
-          $sql = mysqli_query($link, "SELECT * FROM tb_section WHERE id_section = '$section'");
+          $sql = mysqli_query($link, "SELECT * FROM tb_section");
           $result = mysqli_fetch_assoc($sql);
           $date = date('d-M-Y H-i-s');
           $fileNewName = $result['section'].' '.$date.'.'.$fileActualExt;
-          $fileDestination = 'upload/problem/'.$fileNewName;
+          $fileDestination = 'upload/request/'.$fileNewName;
           move_uploaded_file($fileTmp_name, $fileDestination);
-          $sql = mysqli_query($link,"INSERT INTO tb_problem (no_ticket, tgl_prob, email, id_user, id_section, status, id_service, problem, id_item, attachment ,v_key) VALUES ( 
-              '',
-              '$tgl_prob',
-              '$email', 
-              '$id_user',
-              '$id_section',
-              '',
-              '$id_service',
-              '$problem',
-              '$id_item',
-              '$fileNewName',
-              '$v_key')" );
+          $sql = mysqli_query($link,"INSERT INTO tb_request (no_ticket, tgl_req, email, id_user, id_section, status, id_request, description, id_item, attachment, v_key)
+            VALUES ('',
+                    '$tgl_req',
+                    '$email', 
+                    '$id_user',
+                    '$id_section',
+                    '1',
+                    '$id_request',
+                    '$description',
+                    '$id_item',
+                    '$fileNewName',
+                    '$v_key')" );
           if ($sql) {
-            echo "<script>alert('Data Successful Send');</script>";
-          }else {
+            echo "<script>alert('Data Saved Successfully');</script>";
+            echo "<script>window.location='?p=history_request';</script>";
+          } else {
             echo "<script>alert('Data Failed to Save');</script>";
           }
         }else{
@@ -64,7 +65,7 @@ if(isset($_POST["Submit"])){
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">Problem</h3>
+        <h3 class="mb-0">Request</h3>
       </div>
     </div>
   </div>
@@ -76,7 +77,7 @@ if(isset($_POST["Submit"])){
                       <select class="form-control" name="id_user">
                       <option selected disabled>Nama</option>
                       <?php 
-                      $sql = mysqli_query($link, "SELECT * FROM tb_user WHERE id_section = '$section'");
+                      $sql = mysqli_query($link, "SELECT * FROM tb_user");
                       while ($result = mysqli_fetch_assoc($sql)) {
                        echo '<option value ="'.$result['id_user'].'">'.$result['nama'].'</option>';
                       }
@@ -90,7 +91,7 @@ if(isset($_POST["Submit"])){
                     <select class="form-control" name="id_section">
                       <option selected disabled>Section</option>
                     <?php 
-                    $sql = mysqli_query($link, "SELECT * FROM tb_section WHERE id_section = '$section'");
+                    $sql = mysqli_query($link, "SELECT * FROM tb_section");
                       while ($result = mysqli_fetch_assoc($sql)) {
                        echo '<option value ="'.$result['id_section'].'">'.$result['section'].'</option>';
                       }
@@ -99,23 +100,23 @@ if(isset($_POST["Submit"])){
                   </div>
               </div>
               <div class="form-group row">
-                  <label for="fname" class="col-sm-3 text-left control-label col-form-label">Service</label>
+                  <label for="fname" class="col-sm-3 text-left control-label col-form-label">Request</label>
                   <div class="col-sm-6">
-                    <select class="form-control" name="id_service">
-                        <option selected disabled>Service</option>
+                    <select class="form-control" name="id_request">
+                        <option selected disabled>Request</option>
                           <?php 
-                          $sql = mysqli_query($link, "SELECT * FROM tb_service");
+                          $sql = mysqli_query($link, "SELECT * FROM tb_kind_req");
                             while ($result = mysqli_fetch_assoc($sql)) {
-                             echo '<option value ="'.$result['id_service'].'">'.$result['name_service'].'</option>';
+                             echo '<option value ="'.$result['id_request'].'">'.$result['name_request'].'</option>';
                             }
                           ?>
                     </select>
                   </div>
               </div>
               <div class="form-group row">
-                  <label for="fname" class="col-sm-3 text-left control-label col-form-label">Problem</label>
+                  <label for="fname" class="col-sm-3 text-left control-label col-form-label">Description</label>
                   <div class="col-sm-6">
-                      <input type="text" name="problem" class="form-control" id="problem" placeholder="Problem">
+                      <textarea type="text" name="description" class="form-control" id="description" placeholder="Description"></textarea>
                   </div>
               </div>
               <div class="form-group row">

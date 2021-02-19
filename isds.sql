@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 13 Agu 2020 pada 08.33
+-- Generation Time: 17 Feb 2021 pada 08.11
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -86,7 +86,10 @@ CREATE TABLE `tb_problem` (
 --
 
 INSERT INTO `tb_problem` (`no_ticket`, `tgl_prob`, `id_user`, `id_section`, `status`, `id_service`, `problem`, `id_item`, `attachment`, `v_key`, `email`) VALUES
-(1, '2020-08-13', 16, 3, 4, 1, 'Laptop Rusak', 1, 'SES 13-Aug-2020 07-30-06.docx', '7043e2b17b3631d2c69fa521701fbee0', 'monica@gmail.com');
+(1, '2020-08-13', 16, 3, 3, 1, 'Laptop Rusak', 1, 'SES 13-Aug-2020 07-30-06.docx', '7043e2b17b3631d2c69fa521701fbee0', 'monica@gmail.com'),
+(2, '2021-02-11', 16, 3, 3, 1, 'komputer nlue screen', 1, 'SES 11-Feb-2021 05-54-56.docx', '998de0cdd5c0bdd9e3b78cec6415ea1c', 'monica@gmail.com'),
+(3, '2021-02-12', 20, 1, 3, 1, 'perbaiki bug aplikasi ', 1, 'SIT 12-Feb-2021 07-43-46.docx', '96441bbeab1bdc26d85a54004b0e9c26', 'hafisibrahim@gmail.com'),
+(4, '2021-02-13', 20, 1, 3, 1, 'Printer tidak bisa ngeprint', 1, 'SIT 13-Feb-2021 09-18-20.docx', '49d848f2e2734b8c94c2b5baf31d6401', 'hafisibrahim@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -107,6 +110,14 @@ CREATE TABLE `tb_request` (
   `v_key` text NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_request`
+--
+
+INSERT INTO `tb_request` (`no_ticket`, `tgl_req`, `id_user`, `id_section`, `id_request`, `id_item`, `description`, `attachment`, `email`, `v_key`, `status`) VALUES
+(4, '2021-02-13', 16, 3, 3, 1, 'meja aku rusak njir, ganti yang baru eeh', 'SES 13-Feb-2021 08-00-24.docx', 'monica@gmail.com', 'f865bd3ec21336adec9057c5c9275b9e', 9),
+(5, '2021-02-13', 16, 3, 3, 1, 'Meja Rusak tidak bisa digunakan lagi', 'SES 13-Feb-2021 08-13-13.docx', 'monica@gmail.com', '9bb5696326b581e6dfde0835eaee2c60', 2);
 
 -- --------------------------------------------------------
 
@@ -129,7 +140,8 @@ INSERT INTO `tb_section` (`id_section`, `section`) VALUES
 (3, 'SES'),
 (4, 'SMT'),
 (5, 'SQA'),
-(6, 'SRO');
+(6, 'SRO'),
+(8, 'DP');
 
 -- --------------------------------------------------------
 
@@ -174,7 +186,11 @@ INSERT INTO `tb_user` (`id_user`, `password`, `nama`, `email`, `level`, `id_sect
 (15, '$2y$10$EC/oAsPsTjB9Ci4BNsju9e1pV0P5cKjKWOiu5vWI9Ngp44YHAAZrC', 'Geofanny Lorenza', 'geofanny@gmail.com', 'manager', 3),
 (16, '$2y$10$ixetkWg/QwvxB/coDE.v7ubbtkXis2QaIb7N.nRP/hqsWAYqXfVB6', 'Monica Angelina Panggabean', 'monica@gmail.com', 'staff', 3),
 (18, '$2y$10$cui8/GnUIFnblLry9Xae7unHiGyVw9ECfoZLrtzukOGMet9PiIOz6', 'Mikhael Sandro', 'mkhlsndr@gmail.com', 'admin', 1),
-(19, '$2y$10$l2ggZTT4yTZfpiSzUsJqyOI7j7IaoUi4B6pzRoryOjdLoFTgCJ11K', 'Ramanda Sari Sinabang', 'ramanda@gmail.com', 'admin', 1);
+(19, '$2y$10$l2ggZTT4yTZfpiSzUsJqyOI7j7IaoUi4B6pzRoryOjdLoFTgCJ11K', 'Ramanda Sari Sinabang', 'ramanda@gmail.com', 'manager', 8),
+(20, '$2y$10$HIPaAAoWXMD.lzz4hgZteOwhv8OXyhV81/gYdUV.zDvVPLENpoaIu', 'Hafiz ibrahim', 'hafisibrahim@gmail.com', 'staff', 1),
+(21, '$2y$10$34T0cBK6FG/jGjzIZJhAx.GIJnLduXs2VvGgDVVx1Dm6G7Wj4JhES', 'Jaka', 'jaka@gmail.com', 'engineer', 3),
+(26, '$2y$10$TvV.MlWz2k8YswaEn5mSKOccvO2YdbnbBXOkeSzt9LTDoHWkkypR.', 'Harun Santoso', 'harun@gmail.com', 'petugas', 8),
+(27, '$2y$10$JQ2mWcvLtc8NR0/g4aheSeN05qZjy/pCDon.SbeMe/NQt7MevDM/e', 'Edwin El Ammar', 'edwin@gmail.com', 'Manager', 1);
 
 --
 -- Indexes for dumped tables
@@ -247,17 +263,17 @@ ALTER TABLE `tb_kind_req`
 -- AUTO_INCREMENT for table `tb_problem`
 --
 ALTER TABLE `tb_problem`
-  MODIFY `no_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `no_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_request`
 --
 ALTER TABLE `tb_request`
-  MODIFY `no_ticket` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `no_ticket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_section`
 --
 ALTER TABLE `tb_section`
-  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_section` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tb_service`
 --
@@ -267,7 +283,7 @@ ALTER TABLE `tb_service`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --

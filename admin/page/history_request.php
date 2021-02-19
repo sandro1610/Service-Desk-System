@@ -23,20 +23,12 @@
           </thead>
           <tbody>
           <?php
-          if ($_SESSION['email'] == 'mkhlsndr@gmail.com') {
+          if ($_SESSION['email'] == 'mikhaelsandro82@gmail.com') {
             $sql = "SELECT * FROM tb_request 
                     INNER JOIN tb_user ON tb_request.id_user = tb_user.id_user
                     INNER JOIN tb_section ON tb_user.id_section = tb_section.id_section
                     INNER JOIN tb_kind_req ON tb_kind_req.id_request = tb_request.id_request
-                    INNER JOIN tb_item ON tb_request.id_item = tb_item.id_item
-                    WHERE status >= 2";
-          }else{
-              $sql = "SELECT * FROM tb_request 
-                      INNER JOIN tb_user ON tb_request.id_user = tb_user.id_user
-                      INNER JOIN tb_section ON tb_user.id_section = tb_section.id_section
-                      INNER JOIN tb_kind_req ON tb_kind_req.id_request = tb_request.id_request
-                      INNER JOIN tb_item ON tb_request.id_item = tb_item.id_item
-                      WHERE status >= 1";
+                    INNER JOIN tb_item ON tb_request.id_item = tb_item.id_item";
           }
               $query = mysqli_query($link,$sql);
               while($hasil=mysqli_fetch_array($query)):
@@ -113,14 +105,10 @@
                                                                                                 if ($hasil['status'] < 1) {
                                                                                                  echo "Draft";
                                                                                                 }elseif($hasil['status'] == 1){
-                                                                                                  echo "New Request";
-                                                                                                }elseif($hasil['status'] == 2){
                                                                                                   echo "Approved";
-                                                                                                }elseif($hasil['status'] == 3){
+                                                                                                }elseif($hasil['status'] == 2){
                                                                                                   echo "Proccessed";
-                                                                                                }elseif($hasil['status'] == 4){
-                                                                                                  echo "Taking Over";
-                                                                                                }elseif($hasil['status'] == 5){
+                                                                                                }elseif($hasil['status'] == 3){
                                                                                                   echo "Finish";
                                                                                                 }else{
                                                                                                   echo "Rejected";
@@ -135,16 +123,9 @@
                                       </div>
                                   </div>    
                                   <div class="text-center">
-                                    <?php if ($hasil['status'] == 1) {?>
-                                      <a class="btn btn-success" href="javascript:send_request('<?=$hasil['v_key'];?>')">Send</a>
-                                    <?php }elseif ($hasil['status'] == 2) {?>
-                                      <a class="btn btn-success" href="javascript:approve_request('<?=$hasil['v_key'];?>')">Approve</a>
-                                    <?php }elseif ($hasil['status'] == 3) {?>
-                                      <a class="btn btn-success" href="javascript:proccess_request('<?=$hasil['v_key'];?>')">Proccess</a>
-                                    <?php }elseif ($hasil['status'] == 4) {?>
+                                    <?php if ($hasil['status'] == 4) {?>
                                       <a class="btn btn-success" href="javascript:finish_request('<?=$hasil['v_key'];?>')">Finish</a>
                                     <?php } ?>
-                                    <a class="btn btn-pink" href="javascript:reject_request('<?=$hasil['v_key'];?>')">Reject</a>
                                     <a class="btn btn-danger" href="javascript:hapusData_request('<?=$hasil['no_ticket'];?>')">Delete</a>
                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-form<?php echo $hasil['no_ticket']; ?>">Edit</button>
                                   </div>
@@ -163,20 +144,16 @@
               <td><?=$hasil['name_request'];?></td>
               <td><?=$hasil['description'];?></td>
               <td><?=$hasil['name_item'];?></td>
-              <td><a download="<?=$hasil['attachment'];?>" href="upload/request/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a></td>
+              <td><a download="<?=$hasil['attachment'];?>" href="../upload/request/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a></td>
               <td><?=$hasil['email'];?></td>
               <td><?php 
                 if ($hasil['status'] < 1) {
                  echo "Draft";
                 }elseif($hasil['status'] == 1){
-                  echo "New Request";
-                }elseif($hasil['status'] == 2){
                   echo "Approved";
-                }elseif($hasil['status'] == 3){
+                }elseif($hasil['status'] == 2){
                   echo "Proccessed";
-                }elseif($hasil['status'] == 4){
-                  echo "Taking Over";
-                }elseif($hasil['status'] == 5){
+                }elseif($hasil['status'] == 3){
                   echo "Finish";
                 }else{
                   echo "Rejected";

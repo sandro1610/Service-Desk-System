@@ -105,14 +105,12 @@
                                                                                                 if ($hasil['status'] < 1) {
                                                                                                  echo "Draft";
                                                                                                 }elseif($hasil['status'] == 1){
-                                                                                                  echo "New Request";
-                                                                                                }elseif($hasil['status'] == 2){
                                                                                                   echo "Approved";
-                                                                                                }elseif($hasil['status'] == 3){
+                                                                                                }elseif($hasil['status'] == 2){
                                                                                                   echo "Proccessed";
-                                                                                                }elseif($hasil['status'] == 4){
+                                                                                                }elseif($hasil['status'] == 3){
                                                                                                   echo "Taking Over";
-                                                                                                }elseif($hasil['status'] == 5){
+                                                                                                }elseif($hasil['status'] == 4){
                                                                                                   echo "Finish";
                                                                                                 }else{
                                                                                                   echo "Rejected";
@@ -144,20 +142,18 @@
               <td><?=$hasil['name_request'];?></td>
               <td><?=$hasil['description'];?></td>
               <td><?=$hasil['name_item'];?></td>
-              <td><a download="<?=$hasil['attachment'];?>" href="upload/request/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a></td>
+              <td><a download="<?=$hasil['attachment'];?>" href="../upload/request/<?=$hasil['attachment'];?>"><?=$hasil['attachment'];?></a></td>
               <td><?=$hasil['email'];?></td>
               <td><?php 
                 if ($hasil['status'] < 1) {
                  echo "Draft";
                 }elseif($hasil['status'] == 1){
-                  echo "New Request";
-                }elseif($hasil['status'] == 2){
                   echo "Approved";
-                }elseif($hasil['status'] == 3){
+                }elseif($hasil['status'] == 2){
                   echo "Proccessed";
-                }elseif($hasil['status'] == 4){
+                }elseif($hasil['status'] == 3){
                   echo "Taking Over";
-                }elseif($hasil['status'] == 5){
+                }elseif($hasil['status'] == 4){
                   echo "Finish";
                 }else{
                   echo "Rejected";

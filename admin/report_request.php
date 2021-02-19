@@ -59,30 +59,27 @@ $html='<!DOCTYPE html>
               while($hasil=mysqli_fetch_array($query)){
               	$status = "";
               		if ($hasil['status'] < 1) {
-                   $status = "Draft";
+                   $status = "New Request";
                   }elseif($hasil['status'] == 1){
-                    $status = "New Request";
-                  }elseif($hasil['status'] == 2){
                     $status = "Approved";
-                  }elseif($hasil['status'] == 3){
+                  }elseif($hasil['status'] == 2){
                     $status = "Proccessed";
-                  }elseif($hasil['status'] == 4){
-                    $status = "Taking Over";
-                  }elseif($hasil['status'] == 5){
+                  }elseif($hasil['status'] == 3){
                     $status = "Finish";
                   }else{
                     $status = "Rejected";
                   }
             $html .='<tr>
-            	  <td>'.$hasil['no_ticket'].'></td>
-                <td>'.$hasil['tgl_req'].'></td>
-                <td>'.$hasil['nama'].'></td>
-                <td>'.$hasil['section'].'></td>
-                <td>'.$hasil['name_request'].'></td>
-                <td>'.$hasil['description'].'></td>
-                <td>'.$hasil['name_item'].'></td>
-                <td>'.$hasil['attachment'].'></td>
-                <td>'.$hasil['email'].'></td>
+            	  <td>'.$hasil['no_ticket'].'</td>
+                <td>'.$hasil['tgl_req'].'</td>
+                <td>'.$hasil['nama'].'</td>
+                <td>'.$hasil['section'].'</td>
+                <td>'.$hasil['name_request'].'</td>
+                <td>'.$hasil['description'].'</td>
+                <td>'.$hasil['name_item'].'</td>
+                <td>'.$hasil['attachment'].'</td>
+                <td>'.$hasil['email'].'</td>
+                <td>'.$status.'</td>
 	             </tr>';
 	               }
          $html .='</tbody>

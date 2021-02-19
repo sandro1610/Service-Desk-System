@@ -1,9 +1,9 @@
-<?php
+<?php 
  include '../includes/conn.php';
      session_start();
  if (empty($_SESSION['email']) && empty($_SESSION['password']) && empty($_SESSION['id_user'])){
     header("Location:../index.php");
-  }elseif ($_SESSION['level'] != 'manager') {
+  }elseif ($_SESSION['level'] != 'admin') {
     header("Location:../index.php");
   }
 $html='<!DOCTYPE html>
@@ -40,16 +40,22 @@ $html='<!DOCTYPE html>
               </tr>
           </thead>
           <tbody>';
-              $id_section = $_SESSION['id_section'];
-              $sql = "SELECT * FROM tb_problem 
-                      INNER JOIN tb_user ON tb_problem.id_user = tb_user.id_user
-                      INNER JOIN tb_section ON tb_user.id_section = tb_section.id_section
-                      INNER JOIN tb_service ON tb_problem.id_service = tb_service.id_service
-                      INNER JOIN tb_item ON tb_problem.id_item = tb_item.id_item
-                      WHERE tb_problem.id_section = '$id_section'";
+              if ($_SESSION['email'] == 'mkhlsndr@gmail.com') {
+	            $sql = "SELECT * FROM tb_problem 
+	                      INNER JOIN tb_user ON tb_problem.id_user = tb_user.id_user
+	                      INNER JOIN tb_section ON tb_user.id_section = tb_section.id_section
+	                      INNER JOIN tb_service ON tb_problem.id_service = tb_service.id_service
+	                      INNER JOIN tb_item ON tb_problem.id_item = tb_item.id_item
+	                      WHERE status >= 1";
+	          }else{
+	              $sql = "SELECT * FROM tb_problem 
+	                      INNER JOIN tb_user ON tb_problem.id_user = tb_user.id_user
+	                      INNER JOIN tb_section ON tb_user.id_section = tb_section.id_section
+	                      INNER JOIN tb_service ON tb_problem.id_service = tb_service.id_service
+	                      INNER JOIN tb_item ON tb_problem.id_item = tb_item.id_item";
+	          }
               $query = mysqli_query($link,$sql);
-              $hasil=mysqli_fetch_array($query);
-              while($hasil){
+              while($hasil=mysqli_fetch_array($query)){
               	$status = "";
               		if ($hasil['status'] < 1) {
 	                 $status = "Draft";
@@ -93,3 +99,5 @@ $mpdf->WriteHTML($html);
 
 // Output a PDF file directly to the browser
 $mpdf->Output('Laporan_Problem_ISDS.pdf', 'I');
+
+?>

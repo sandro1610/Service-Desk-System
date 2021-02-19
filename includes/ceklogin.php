@@ -19,8 +19,12 @@ if (isset($_POST["submit"]) ){
                 	echo "<script>window.location='../manager/index.php';</script>";
                 }elseif ($result['level'] == 'staff') {
                 	echo "<script>window.location='../staff/index.php';</script>";
+                }elseif ($result['level'] == 'engineer') {
+                	echo "<script>window.location='../engineer/index.php';</script>"; 
+                }elseif ($result['level'] == 'petugas') {
+                	echo "<script>window.location='../petugas/index.php';</script>";         
                 }else{
-	                echo "<script>alert('Login Failed');</script>";
+	                echo "<script>alert('Login Failed');</scrixpt>";
 	                echo "<script>window.location='../index.php';</script>";	
             	}
 			}else{
@@ -30,7 +34,7 @@ if (isset($_POST["submit"]) ){
 		}
 	}else{
 		echo "<script>alert('User 0');</script>";
-		header("Loacation: ../index.php");
+		echo "<script>window.location='../index.php';</script>";
 	}
 }
  ?>

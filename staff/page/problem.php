@@ -29,7 +29,7 @@ if(isset($_POST["Submit"])){
           $result = mysqli_fetch_assoc($sql);
           $date = date('d-M-Y H-i-s');
           $fileNewName = $result['section'].' '.$date.'.'.$fileActualExt;
-          $fileDestination = 'upload/problem/'.$fileNewName;
+          $fileDestination = '../upload/problem/'.$fileNewName;
           move_uploaded_file($fileTmp_name, $fileDestination);
           $sql = mysqli_query($link,"INSERT INTO tb_problem (no_ticket, tgl_prob, email, id_user, id_section, status, id_service, problem, id_item, attachment ,v_key) VALUES ( 
               '',
